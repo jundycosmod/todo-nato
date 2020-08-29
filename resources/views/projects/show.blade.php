@@ -2,12 +2,12 @@
 
 @section('content')
     <header class="navbar navbar-expand-lg navbar-light bg-white">
-        <div class="col-8">
+        <div class="col-sm-8">
             <h1>
                 {{ $project->title }}
             </h1>
         </div>
-        <div class="col-4 text-right">
+        <div class="col-sm-4 text-right">
             @foreach ($project->members as $member)
             <img
                 src="{{ gravatar_url($member->email) }}"
@@ -26,7 +26,7 @@
 
     <main>
         <div class="row mx-2">
-            <div class="col-8">
+            <div class="col-sm-8">
                 <div class="mb-8">
 
                     {{-- tasks --}}
@@ -58,7 +58,7 @@
                 </div>
             </div>
 
-            <div class="col-4">
+            <div class="col-sm-4">
                 @include ('projects.card')
                 @include('projects.notes')
                 @include ('projects.activity.card')                
