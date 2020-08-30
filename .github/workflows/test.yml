@@ -1,0 +1,4 @@
+- name: Laravel PHPUnit
+  # You may pin to the exact commit or the version.
+  # uses: nathanheffley/laravel-phpunit-action@1ac680fbc5f20621343f0d7ba450a02b807c576e
+  uses: nathanheffley/laravel-phpunit-action@v0.1.0
