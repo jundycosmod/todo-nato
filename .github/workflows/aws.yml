@@ -25,9 +25,7 @@
 
 on:
   push:
-    branches:
-    - main
-    - release/*
+  pull_request:
   #release:
     #types: [created]
 
