@@ -43,6 +43,13 @@
                                         </div>
                                     </div>
                                     <input name="body" value="{{ $task->body }}" class="form-control border-0" style="{{ $task->completed ? 'text-decoration: line-through; color: #c7c7c7' : '' }}">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text border-0 bg-white">{{ $task->start_datetime }}</span>
+                                        @if( $task->end_datetime )
+                                            to
+                                            <span class="input-group-text border-0 bg-white">{{ $task->end_datetime }}</span>
+                                        @endif
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -51,8 +58,22 @@
                     <div class="alert alert-light">
                         <form action="{{ $project->path() . '/tasks' }}" method="POST">
                             @csrf
-
-                            <input placeholder="Add a new task..." class="form-control" name="body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <input placeholder="Add a new task..." class="form-control" name="body">
+                                </div>
+                                <div class="col-sm-3">
+                                    <input type='datetime-local' name="start_datetime" class="form-control" placeholder="Start Date" />
+                                </div>
+                                <div class="col-sm-3">
+                                    <input type='datetime-local' name="end_datetime" class="form-control" placeholder="Due Date" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

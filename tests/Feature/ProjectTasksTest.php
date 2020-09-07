@@ -6,6 +6,7 @@ use App\Project;
 use Facades\Tests\Setup\ProjectFactory;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Carbon;
 
 class ProjectTasksTest extends TestCase
 {
@@ -55,6 +56,44 @@ class ProjectTasksTest extends TestCase
 
         $this->get($project->path())
             ->assertSee('Test task');
+    }
+
+    /** @test */
+    public function a_project_can_have_tasks_with_start_date()
+    {
+        $project = ProjectFactory::create();
+
+        $startDateTime = Carbon::now()->toDateTimeString();
+
+        $this->actingAs($project->owner)
+             ->post($project->path() . '/tasks', [
+                 'body' => 'Test task',
+                 'start_datetime' => $startDateTime
+                ]
+            );
+
+        $this->get($project->path())
+            ->assertSee('Test task')
+            ->assertSee($startDateTime);
+    }
+
+    /** @test */
+    public function a_project_can_have_tasks_with_due_date()
+    {
+        $project = ProjectFactory::create();
+
+        $dueDateTime = Carbon::now()->toDateTimeString();
+
+        $this->actingAs($project->owner)
+             ->post($project->path() . '/tasks', [
+                 'body' => 'Test task',
+                 'end_datetime' => $dueDateTime
+                ]
+            );
+
+        $this->get($project->path())
+            ->assertSee('Test task')
+            ->assertSee($dueDateTime);
     }
 
     /** @test */
