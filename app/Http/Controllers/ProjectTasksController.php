@@ -18,9 +18,13 @@ class ProjectTasksController extends Controller
     {
         $this->authorize('update', $project);
 
-        request()->validate(['body' => 'required']);
-
-        $project->addTask(request('body'));
+        request()->validate([
+            'body' => 'required',
+            'start_datetime' => 'nullable',
+            'end_datetime' => 'nullable'
+        ]);
+   
+        $project->addTask(request(['body', 'start_datetime', 'end_datetime']));
 
         return redirect($project->path());
     }
