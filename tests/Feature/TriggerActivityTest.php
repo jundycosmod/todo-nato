@@ -52,7 +52,7 @@ class TriggerActivityTest extends TestCase
     {
         $project = ProjectFactory::create();
 
-        $project->addTask('Some task');
+        $project->addTask(['body' => 'Some task']);
 
         $this->assertCount(2, $project->activity);
 
